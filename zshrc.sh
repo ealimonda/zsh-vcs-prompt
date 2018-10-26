@@ -308,15 +308,16 @@ function _zsh_vcs_prompt_update_vcs_status() {
     local vcs_name=${vcs_status[2]}
     local action=${vcs_status[3]}
     local branch=${vcs_status[4]}
-    local ahead=${vcs_status[5]}
-    local behind=${vcs_status[6]}
-    local staged=${vcs_status[7]}
-    local conflicts=${vcs_status[8]}
-    local unstaged=${vcs_status[9]}
-    local untracked=${vcs_status[10]}
-    local stashed=${vcs_status[11]}
-    local clean=${vcs_status[12]}
-    local unmerged=${vcs_status[13]}
+    local patches=${vcs_status[5]}
+    local ahead=${vcs_status[6]}
+    local behind=${vcs_status[7]}
+    local staged=${vcs_status[8]}
+    local conflicts=${vcs_status[9]}
+    local unstaged=${vcs_status[10]}
+    local untracked=${vcs_status[11]}
+    local stashed=${vcs_status[12]}
+    local clean=${vcs_status[13]}
+    local unmerged=${vcs_status[14]}
 
     # Select formats.
     local used_formats
@@ -330,6 +331,10 @@ function _zsh_vcs_prompt_update_vcs_status() {
             else
                 used_formats=$ZSH_VCS_PROMPT_GIT_FORMATS
             fi
+	    patches=
+	else
+	    ahead=
+	    behind=
         fi
     else
         used_formats=$ZSH_VCS_PROMPT_VCS_ACTION_FORMATS
@@ -374,6 +379,7 @@ function _zsh_vcs_prompt_update_vcs_status() {
         -e "s/#g/$unstaged/" \
         -e "s/#h/$untracked/" \
         -e "s/#i/$stashed/" \
+	-e "s/#p/$patches/" \
         -e "s/#j/$clean/")
 
     ZSH_VCS_PROMPT_VCS_STATUS=$prompt_info

@@ -200,6 +200,7 @@ def main():
     # Result
     out = '\n'.join([
         branch,
+        "0", # patches
         str(ahead),
         str(behind),
         str(staged),

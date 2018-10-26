@@ -53,6 +53,16 @@ zstyle ':vcs_info:(git|hg):*' use-simple true
 # Put the data into vcs_info_msg_*_ variables.
 zstyle ':vcs_info:*' formats '%s' '%b' '%m'
 zstyle ':vcs_info:*' actionformats '%s' '%b' '%m' '%a'
+# In patch-format and nopatch-format these replacements are done:
+#   %p : The name of the top-most applied patch (applied-string).
+#   %u : The number of unapplied patches (unapplied-string).
+#   %n : The number of applied patches.
+#   %c : The number of unapplied patches.
+#   %a : The number of all patches.
+#   %g : The names of active mq guards (hg backend).
+#   %G : The number of active mq guards (hg backend).
+zstyle ':vcs_info:*' patch-format '%n\/%a'
+zstyle ':vcs_info:*' nopatch-format '%a'
 
 zstyle ':vcs_info:(git|hg):*' check-for-changes false
 
@@ -206,7 +216,7 @@ function _zsh_vcs_prompt_get_git_status() {
     fi
 
     # Output result.
-    echo "$ahead\n$behind\n$staged\n$conflicts\n$unstaged\n$untracked\n$stashed\n$clean\n$unmerged"
+    echo "\n$ahead\n$behind\n$staged\n$conflicts\n$unstaged\n$untracked\n$stashed\n$clean\n$unmerged"
 }
 
 # vim: ft=zsh
