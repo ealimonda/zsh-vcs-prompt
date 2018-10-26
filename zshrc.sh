@@ -318,6 +318,19 @@ function _zsh_vcs_prompt_update_vcs_status() {
     local stashed=${vcs_status[12]}
     local clean=${vcs_status[13]}
     local unmerged=${vcs_status[14]}
+    local status_color=
+
+    if [ -n "$conflicts" -a "$conflicts" != '0' ]; then
+            status_color=red
+    elif [ -n "$unstaged" -a "$unstaged" != '0' ]; then
+            status_color=yellow
+    elif [ -n "$staged" -a "$staged" != '0' ]; then
+            status_color=blue
+    elif [ -n "$untracked" -a "$untracked" != '0' ]; then
+            status_color=cyan
+    else
+            status_color=green
+    fi
 
     # Select formats.
     local used_formats
@@ -379,6 +392,7 @@ function _zsh_vcs_prompt_update_vcs_status() {
         -e "s/#g/$unstaged/" \
         -e "s/#h/$untracked/" \
         -e "s/#i/$stashed/" \
+	-e "s/#x/$status_color/" \
 	-e "s/#p/$patches/" \
         -e "s/#j/$clean/")
 
