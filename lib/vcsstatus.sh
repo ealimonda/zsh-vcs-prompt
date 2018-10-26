@@ -27,7 +27,7 @@
 if ! type vcs_info > /dev/null 2>&1; then
     autoload -Uz vcs_info || return 1
 fi
-zstyle ':vcs_info:*' enable git svn hg bzr
+zstyle ':vcs_info:*' enable git svn hg
 
 # Specify the command path to git used by VCS_INFO.
 zstyle ':vcs_info:git:*:-all-' command =git
@@ -37,7 +37,7 @@ zstyle ':vcs_info:*' max-exports 5
 
 # To be enable check-for-changes with hg.
 zstyle ':vcs_info:hg:*' get-revision true
-zstyle ':vcs_info:(git|hg|bzr):*' use-simple true
+zstyle ':vcs_info:(git|hg):*' use-simple true
 
 ## Set formats.
 #
