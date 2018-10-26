@@ -381,8 +381,14 @@ function _zsh_vcs_prompt_update_vcs_status() {
 
     # Compose prompt status.
     local prompt_info
+    local vcs_sigil
+    case $vcs_name in
+	    git) vcs_sigil='±' ;;
+	    svn) vcs_sigil='⑆' ;;
+	    hg)  vcs_sigil='☿' ;;
+    esac
     prompt_info=$(echo "$used_formats" | sed \
-        -e "s/#s/$vcs_name/" \
+        -e "s/#s/$vcs_sigil/" \
         -e "s/#a/$action/" \
         -e "s/#b/$branch/" \
         -e "s/#c/$ahead/" \
